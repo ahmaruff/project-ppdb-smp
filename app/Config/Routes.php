@@ -35,7 +35,12 @@ $routes->get('tentang',     '\App\Controllers\Home\HomeController::tentang');
 $routes->get('info',        '\App\Controllers\Home\HomeController::info');
 $routes->get('info/(:num)', '\App\Controllers\Home\HomeController::infoDetailById/$1');
 
-service('auth')->routes($routes);
+service('auth')->routes($routes, [ 'except' => ['login', 'register']]);
+
+$routes->get('login',       '\App\Controllers\Auth\LoginController::loginView');
+$routes->post('login',      '\App\Controllers\Auth\LoginController::loginAction');
+$routes->get('register',    '\App\Controllers\Auth\RegisterController::registerView');
+$routes->post('register',   '\App\Controllers\Auth\RegisterController::registerSiswaAction');
 
 /*
  * --------------------------------------------------------------------
