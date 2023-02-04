@@ -24,8 +24,12 @@ class Auth extends ShieldAuth
      * ////////////////////////////////////////////////////////////////////
      */
     public array $views = [
-        'login'                       => '\CodeIgniter\Shield\Views\login',
-        'register'                    => '\CodeIgniter\Shield\Views\register',
+        // 'login'                       => '\CodeIgniter\Shield\Views\login',
+        // 'register'                    => '\CodeIgniter\Shield\Views\register',
+
+        'login'                       => '\App\Views\auth\login',
+        'register'                    => '\App\Views\auth\register',
+
         'layout'                      => '\CodeIgniter\Shield\Views\layout',
         'action_email_2fa'            => '\CodeIgniter\Shield\Views\email_2fa_show',
         'action_email_2fa_verify'     => '\CodeIgniter\Shield\Views\email_2fa_verify',
@@ -52,10 +56,10 @@ class Auth extends ShieldAuth
      * to apply any logic you may need.
      */
     public array $redirects = [
-        'register'    => '/',
-        'login'       => '/',
+        'register'    => '/login',
+        'login'       => '/siswa',
         'logout'      => 'login',
-        'force_reset' => '/',
+        'force_reset' => '/reset-password',
     ];
 
     /**
@@ -167,7 +171,7 @@ class Auth extends ShieldAuth
      * could be modified as the only method of login once an account
      * has been set up.
      */
-    public bool $allowMagicLinkLogins = true;
+    public bool $allowMagicLinkLogins = false;
 
     /**
      * --------------------------------------------------------------------
@@ -194,7 +198,7 @@ class Auth extends ShieldAuth
      */
     public array $sessionConfig = [
         'field'              => 'user',
-        'allowRemembering'   => true,
+        'allowRemembering'   => false,
         'rememberCookieName' => 'remember',
         'rememberLength'     => 30 * DAY,
     ];
@@ -206,7 +210,7 @@ class Auth extends ShieldAuth
      * The minimum length that a password must be to be accepted.
      * Recommended minimum value by NIST = 8 characters.
      */
-    public int $minimumPasswordLength = 8;
+    public int $minimumPasswordLength = 6;
 
     /**
      * --------------------------------------------------------------------
@@ -221,8 +225,8 @@ class Auth extends ShieldAuth
      */
     public array $passwordValidators = [
         CompositionValidator::class,
-        NothingPersonalValidator::class,
-        DictionaryValidator::class,
+        // NothingPersonalValidator::class,
+        // DictionaryValidator::class,
         // PwnedValidator::class,
     ];
 
@@ -234,7 +238,7 @@ class Auth extends ShieldAuth
      */
     public array $validFields = [
         'email',
-        // 'username',
+        'username',
     ];
 
     /**
@@ -344,7 +348,7 @@ class Auth extends ShieldAuth
      *
      * @var class-string<UserModel>
      */
-    public string $userProvider = UserModel::class;
+    public string $userProvider = \App\Models\UserModel::class;
 
     /**
      * Returns the URL that a user should be redirected
@@ -352,6 +356,14 @@ class Auth extends ShieldAuth
      */
     public function loginRedirect(): string
     {
+        if (auth()->user()->can('admin.access')) {
+            return '/admin';
+        }
+
+        if (auth()->user()->can('user.access')) {
+            return '/siswa';
+        }
+
         $url = setting('Auth.redirects')['login'];
 
         return $this->getUrl($url);
