@@ -11,7 +11,7 @@ $routes = Services::routes();
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('\Home\HomeController');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -29,7 +29,11 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/',           '\App\Controllers\Home\HomeController::index');
+$routes->get('home',        '\App\Controllers\Home\HomeController::index');
+$routes->get('tentang',     '\App\Controllers\Home\HomeController::tentang');
+$routes->get('info',        '\App\Controllers\Home\HomeController::info');
+$routes->get('info/(:num)', '\App\Controllers\Home\HomeController::infoDetailById/$1');
 
 service('auth')->routes($routes);
 
