@@ -39,7 +39,7 @@ class SiswaController extends BaseController
 
         $this->session->set('message',[]);
         $this->session->regenerate(true);
-        
+
         if ($persyaratanHasEmpty) {
             $this->session->push('message',[['warning', 'Terdapat BERKAS PERSYARATAN yang belum lengkap, Mohon segera lengkapi!']]);
         } 
@@ -65,5 +65,37 @@ class SiswaController extends BaseController
         ];
         
         return view('siswa/dashboard.php', $data);
+    }
+
+    public function pengumumanView()
+    {
+        $user = auth()->user();
+        $no_registrasi = $user->username;
+        $biodata = $this->db->table('biodata')->where('id_user',$user->id)->get()->getFirstRow();
+
+        //     file path under public folder / <<first 2 number for tahun>> / << 3rd number,"gelombang" >> / <<username>> 
+        $berkas_path = '/uploads/persyaratan/'.substr($no_registrasi,0,2).'/'.substr($no_registrasi,2,1).'/'.$no_registrasi;
+        // output e.g /uploads/persyaratan/23/1/2310002
+
+        // BERKAS
+        $persyaratan = $this->db->table('persyaratan')->where('id_user', $user->id)->get()->getFirstRow(); 
+        $pas_foto_path = $berkas_path.'/'.$persyaratan->pas_foto;
+
+        $active_jadwal_ppdb = $this->db->table('jadwal_ppdb')->where('is_active',true)->get()->getFirstRow();
+
+        $hasil_seleksi = $this->db->table('hasil_seleksi')->where('id_user', $user->id)->get()->getFirstRow();
+
+        $data = [
+            'title'         => 'Pengumuman - '.$biodata->nama,
+            'nama'          => $biodata->nama,
+            'no_registrasi' => $no_registrasi,
+            'pas_foto_path' => $pas_foto_path,
+            'biodata'       => $biodata,
+            'email'         => $user->email,
+            'status'      => $hasil_seleksi->status,
+            'jadwal_ppdb'   => $active_jadwal_ppdb,
+        ];
+
+        return view('siswa/pengumuman.php', $data);
     }
 }

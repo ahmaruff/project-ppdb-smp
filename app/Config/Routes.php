@@ -45,6 +45,7 @@ $routes->post('register',   '\App\Controllers\Auth\RegisterController::registerS
 
 $routes->group('siswa',['filter' => ['session','siswa-auth']], static function($routes) {
     $routes->get('/','\App\Controllers\Siswa\SiswaController::dashboard');
+    $routes->get('pengumuman', '\App\Controllers\Siswa\SiswaController::pengumumanView');
 });
 
 /*
