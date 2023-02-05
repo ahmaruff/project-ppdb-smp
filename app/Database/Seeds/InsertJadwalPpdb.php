@@ -16,6 +16,7 @@ class InsertJadwalPpdb extends Seeder
             'tanggal_seleksi' => '2023-04-5',
             'tanggal_pengumuman' => '2023-04-10',
             'is_active' => true,
+            'ketua_panitia' => 'Sujatmiko, S.Pd.'
         ];
         $this->db->table('jadwal_ppdb')->insert($data);
     }
