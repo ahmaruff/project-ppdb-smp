@@ -226,7 +226,9 @@ class RegisterController extends ShieldRegister
         $bukti_pembayaran_filename = "bukti_pembayaran{$no_registrasi}.{$bukti_pembayaran_ext}";
 
         $persyaratanRequest['pas_foto'] = $pas_foto_filename;
+        $persyaratanRequest['pas_foto_status'] = 'pending';
         $persyaratanRequest['bukti_pembayaran'] = $bukti_pembayaran_filename;
+        $persyaratanRequest['bukti_pembayaran_status'] = 'pending';
 
         try {
             $users->save($user);
