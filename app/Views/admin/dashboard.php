@@ -8,7 +8,7 @@
             <?php if(session('message')!== null && is_array(session('message'))) : ?>
                 <?php foreach (session('message') as $flash) :?>
                     <div class="alert alert-<?= $flash[0]?> alert-dismissible fade show m-1 small" role="alert">
-                        <?= print_r($flash[1]) ?>
+                        <?php print_r($flash[1]) ?>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endforeach ?>
@@ -81,7 +81,7 @@
                 </tbody>
             </table>
         </div>
-        <form action="/admin/change-jadwal" method="post">
+        <form action="/admin/ubah-jadwal" method="post">
             <?= csrf_field() ?>
 
             <div class="mb-3 row align-items-center gap-3">

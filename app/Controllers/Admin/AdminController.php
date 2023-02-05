@@ -52,6 +52,21 @@ class AdminController extends BaseController
         return view('admin/dashboard.php', $data);
     }
 
+    public function ubahJadwalAktifAction()
+    { 
+        $jadwal_id = $this->request->getPost('jadwal_aktif');
+
+        try {
+            $this->db->table('jadwal_ppdb')->update(['is_active' => null]);
+            $this->db->table('jadwal_ppdb')->update(['is_active' => true],['id' => $jadwal_id]);
+        } catch (ValidationException $e) {
+            $message = ['danger',$this->db->error()];
+            return redirect()->back()->withInput()->with('message',[$message]);
+        }
+        $message = ['success', 'Jadwal PPDB Aktif sukses diubah!'];
+        return redirect()->back()->with('message', [$message]);
+    }
+
     public function ubahPasswordView()
     {
         $user = auth()->user();
@@ -93,7 +108,7 @@ class AdminController extends BaseController
 
         if(!$matchPassword->isOK()) {
             $message = ['danger', $matchPassword->extraInfo()];
-            return redirect()->back()->withInput()->with('message',[]);
+            return redirect()->back()->withInput()->with('message',[$message]);
         }
         $password_baru = $this->request->getPost('password');
         $password_confirm = $this->request->getPost('password_confirm');
