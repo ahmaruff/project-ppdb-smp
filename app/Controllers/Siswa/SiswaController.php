@@ -37,21 +37,22 @@ class SiswaController extends BaseController
         $pendidikanHasEmpty = count(array_filter((array)$pendidikan,fn($v)  => empty($v))) > 0;
         $orangtuaHasEmpty = count(array_filter((array)$orangtua,fn($v)  => empty($v))) > 0;
 
-        $this->session->set('message',[]);
-        $this->session->regenerate(true);
+        $message = array();
 
         if ($persyaratanHasEmpty) {
-            $this->session->push('message',[['warning', 'Terdapat BERKAS PERSYARATAN yang belum lengkap, Mohon segera lengkapi!']]);
+            array_push($message,['warning', 'Terdapat BERKAS PERSYARATAN yang belum lengkap, Mohon segera lengkapi!']);
         } 
         if ($biodataHasEmpty) {
-            $this->session->push('message',[['warning', 'Terdapat BIODATA yang belum lengkap, Mohon segera lengkapi!']]);
+            array_push($message,['warning', 'Terdapat BIODATA yang belum lengkap, Mohon segera lengkapi!']);
         } 
         if ($pendidikanHasEmpty) {
-            $this->session->push('message',[['warning', 'Terdapat DATA PENDIDIKAN yang belum lengkap, Mohon segera lengkapi!']]);
+            array_push($message, ['warning', 'Terdapat DATA PENDIDIKAN yang belum lengkap, Mohon segera lengkapi!']);
         } 
         if ($orangtuaHasEmpty) {
-            $this->session->push('message',[['warning', 'Terdapat DATA ORANGTUA yang belum lengkap, Mohon segera lengkapi!']]);
+            array_push($message, ['warning', 'Terdapat DATA ORANGTUA yang belum lengkap, Mohon segera lengkapi!']);
         }
+
+        $this->session->setFlashdata('message', $message);
 
         $data = [
             'title'         => 'PPDB - '.$biodata->nama,
