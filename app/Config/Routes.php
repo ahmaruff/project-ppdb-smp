@@ -52,6 +52,8 @@ $routes->group('siswa',['filter' => ['session','siswa-auth']], static function($
     $routes->post('biodata', '\App\Controllers\Siswa\BiodataController::biodataAction');
     $routes->get('pendidikan', '\App\Controllers\Siswa\PendidikanController::pendidikanView');
     $routes->post('pendidikan', '\App\Controllers\Siswa\PendidikanController::pendidikanAction');
+    $routes->get('orangtua', '\App\Controllers\Siswa\OrangtuaController::orangtuaView');
+    $routes->post('orangtua', '\App\Controllers\Siswa\OrangtuaController::orangtuaAction');
 });
 
 /*
