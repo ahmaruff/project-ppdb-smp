@@ -70,6 +70,26 @@ class SiswaController extends BaseController
         return view('siswa/dashboard.php', $data);
     }
 
+    public function kartuPendaftaranView()
+    {
+        $user = auth()->user();
+        
+        $biodata = $this->db->table('biodata')->where('id_user', $user->id)->get()->getFirstRow();
+        $password = $this->db->table('pw')->where('id_user', $user->id)->get()->getFirstRow();
+        $active_jadwal_ppdb = $this->db->table('jadwal_ppdb')->where('is_active', true)->get()->getFirstRow();
+
+        $data = [
+            'email' => $user->email,
+            'nama' => $biodata->nama,
+            'no_registrasi' => $user->username,
+            'password' => $password->pw,
+            'tanggal_registrasi' => $biodata->tanggal_pendaftaran,
+            'tahun_ajaran' => $active_jadwal_ppdb->tahun_ajaran,
+        ];
+
+        return view('siswa/kartu-pendaftaran.php', $data);
+    }
+
     public function pengumumanView()
     {
         $user = auth()->user();

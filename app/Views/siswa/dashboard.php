@@ -24,7 +24,7 @@
             <div class="card text-center border-0 border-end">
                 <div class="card-body">
                     <h5 class="card-title">Kartu Pendaftaran</h5>
-                    <a href="#" class="btn btn-outline-secondary d-block btn-lg"><i class="bi bi-printer"></i> Cetak</a>
+                    <a href="#" class="btn btn-outline-secondary d-block btn-lg" onclick="frames['printKartuPendaftaran'].print()"><i class="bi bi-printer"></i> Cetak</a>
                 </div>
             </div>
             <div class="card text-center border-0 border-end">
@@ -33,16 +33,10 @@
                     <a href="#" class="btn btn-outline-secondary d-block btn-lg" onclick="frames['printPengumuman'].print()"><i class="bi bi-printer"></i> Cetak</a>
                 </div>
             </div>
-            <div class="card text-center border-0 border-end">
-                <div class="card-body">
-                    <h5 class="card-title">Unduh Panduan</h5>
-                    <a href="#" class="btn btn-outline-secondary d-block btn-lg"><i class="bi bi-cloud-download"></i> Unduh</a>
-                </div>
-            </div>
             <div class="card text-center border-0">
                 <div class="card-body">
                     <h5 class="card-title">Ada Pertanyaan?</h5>
-                    <a href="#" class="btn btn-outline-secondary d-block btn-lg"><i class="bi bi-telephone"></i> Kontak</a>
+                    <a href="/#kontak" class="btn btn-outline-secondary d-block btn-lg"><i class="bi bi-telephone"></i> Kontak</a>
                 </div>
             </div>
         </div>
@@ -246,4 +240,5 @@
     </div>
 </div>
 <iframe src="/siswa/pengumuman" frameborder="0" style="display:none;" name="printPengumuman"></iframe>
+<iframe src="/siswa/kartu-pendaftaran" frameborder="0" style="display:none;" name="printKartuPendaftaran"></iframe>
 <?= $this->endSection() ?>
