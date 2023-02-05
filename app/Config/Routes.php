@@ -59,6 +59,10 @@ $routes->group('siswa',['filter' => ['session','siswa-auth']], static function($
     $routes->post('persyaratan', '\App\Controllers\Siswa\PersyaratanController::persyaratanAction');
 });
 
+$routes->group('admin',['filter' => ['session','admin-auth']], static function($routes) {
+    $routes->get('/', '\App\Controllers\Admin\AdminController::dashboard');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
