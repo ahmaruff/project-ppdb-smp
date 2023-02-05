@@ -48,6 +48,8 @@ $routes->group('siswa',['filter' => ['session','siswa-auth']], static function($
     $routes->get('pengumuman', '\App\Controllers\Siswa\SiswaController::pengumumanView');
     $routes->get('ubah-password',   '\App\Controllers\Siswa\SiswaController::ubahPasswordView');
     $routes->post('ubah-password',  '\App\Controllers\Siswa\SiswaController::ubahPasswordAction');
+    $routes->get('biodata', '\App\Controllers\Siswa\BiodataController::biodataView');
+    $routes->post('biodata', '\App\Controllers\Siswa\BiodataController::biodataAction');
 });
 
 /*
