@@ -54,6 +54,8 @@ $routes->group('siswa',['filter' => ['session','siswa-auth']], static function($
     $routes->post('pendidikan', '\App\Controllers\Siswa\PendidikanController::pendidikanAction');
     $routes->get('orangtua', '\App\Controllers\Siswa\OrangtuaController::orangtuaView');
     $routes->post('orangtua', '\App\Controllers\Siswa\OrangtuaController::orangtuaAction');
+    $routes->get('persyaratan', '\App\Controllers\Siswa\PersyaratanController::persyaratanView');
+    $routes->post('persyaratan', '\App\Controllers\Siswa\PersyaratanController::persyaratanAction');
 });
 
 /*
