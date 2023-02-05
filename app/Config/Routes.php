@@ -42,6 +42,11 @@ $routes->post('login',      '\App\Controllers\Auth\LoginController::loginAction'
 $routes->get('register',    '\App\Controllers\Auth\RegisterController::registerView');
 $routes->post('register',   '\App\Controllers\Auth\RegisterController::registerSiswaAction');
 
+
+$routes->group('siswa',['filter' => ['session','siswa-auth']], static function($routes) {
+    $routes->get('/','\App\Controllers\Siswa\SiswaController::dashboard');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
