@@ -64,6 +64,12 @@ $routes->group('admin',['filter' => ['session','admin-auth']], static function($
     $routes->post('ubah-jadwal', '\App\Controllers\Admin\AdminController::ubahJadwalAktifAction');
     $routes->get('ubah-password', '\App\Controllers\Admin\AdminController::ubahPasswordView');
     $routes->post('ubah-password', '\App\Controllers\Admin\AdminController::ubahPasswordAction');
+    $routes->get('jadwal-ppdb', '\App\Controllers\Admin\JadwalPpdbController::jadwalDashboardView');
+    $routes->get('jadwal-ppdb/add', '\App\Controllers\Admin\JadwalPpdbController::jadwalAddView');
+    $routes->post('jadwal-ppdb/add', '\App\Controllers\Admin\JadwalPpdbController::jadwalAddAction');
+    $routes->get('jadwal-ppdb/edit/(:num)', '\App\Controllers\Admin\JadwalPpdbController::jadwalEditView/$1');
+    $routes->post('jadwal-ppdb/edit/(:num)', '\App\Controllers\Admin\JadwalPpdbController::jadwalEditAction/$1');
+    $routes->get('jadwal-ppdb/delete/(:num)', '\App\Controllers\Admin\JadwalPpdbController::jadwalDeleteAction/$1');
 });
 
 /*
