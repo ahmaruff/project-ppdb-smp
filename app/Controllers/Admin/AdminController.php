@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 use Config\Database as ConfigDatabase;
+use CodeIgniter\Validation\Exceptions\ValidationException;
 
 class AdminController extends BaseController
 {
@@ -49,5 +50,75 @@ class AdminController extends BaseController
         ];
 
         return view('admin/dashboard.php', $data);
+    }
+
+    public function ubahPasswordView()
+    {
+        $user = auth()->user();
+        $data = [
+            'title'=> 'Ubah Password Admin',
+            'user' => $user
+        ];
+        return view('admin/ubah-password.php', $data);
+    }
+
+    public function ubahPasswordAction()
+    {
+        $user = auth()->user();
+        $rules = [
+            'password_lama' => [
+                'label' => 'Password Lama',
+                'rules' => ['required', 'string']
+            ],
+            'password' => [
+                'label' => 'Password Baru',
+                'rules' => ['required', 'string']
+            ],
+            'password_confirm' => [
+                'label' => 'Konfirmasi Password Baru',
+                'rules' => ['required', 'string', 'matches[password]']
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            $message = ['danger', $this->validator->getErrors()];
+            return redirect()->back()->withInput()->with('message', [$message]);
+        }
+
+        $password_lama = $this->request->getPost('password_lama');
+        $matchPassword = auth()->check([
+            'username' => $user->username,
+            'password' => $password_lama,
+        ]);
+
+        if(!$matchPassword->isOK()) {
+            $message = ['danger', $matchPassword->extraInfo()];
+            return redirect()->back()->withInput()->with('message',[]);
+        }
+        $password_baru = $this->request->getPost('password');
+        $password_confirm = $this->request->getPost('password_confirm');
+
+        if($password_baru !== $password_confirm) {
+            $message = ['danger', 'Inputan password baru & konfirmasi password tidak cocok'];
+            return redirect()->back()->withInput()->with('message',[$message]);
+        }
+
+        try {
+            $users = new UserModel;
+            $user->fill([
+                'password' => $password_baru,
+                'password_confirm' => $password_confirm, 
+            ]);
+            $users->save($user);
+
+            $this->db->table('pw')->update(['pw' => $password_baru],['id_user'=> $user->id]);
+        }
+        catch (ValidationException $e) {
+            $message = ['danger', $this->db->error()];
+            return redirect()->back()->withInput()->with('message', [$message]);
+        }
+
+        $message = [ 'success', 'Berhasil mengubah password'];
+        return redirect()->back()->with('message', [$message]);
     }
 }

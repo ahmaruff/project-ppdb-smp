@@ -61,6 +61,8 @@ $routes->group('siswa',['filter' => ['session','siswa-auth']], static function($
 
 $routes->group('admin',['filter' => ['session','admin-auth']], static function($routes) {
     $routes->get('/', '\App\Controllers\Admin\AdminController::dashboard');
+    $routes->get('ubah-password', '\App\Controllers\Admin\AdminController::ubahPasswordView');
+    $routes->post('ubah-password', '\App\Controllers\Admin\AdminController::ubahPasswordAction');
 });
 
 /*
