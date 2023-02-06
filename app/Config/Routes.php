@@ -47,6 +47,8 @@ $routes->post('register',   '\App\Controllers\Auth\RegisterController::registerS
 $routes->group('siswa',['filter' => ['session','siswa-auth']], static function($routes) {
     $routes->get('/','\App\Controllers\Siswa\SiswaController::dashboard');
     $routes->get('kartu-pendaftaran', '\App\Controllers\Siswa\SiswaController::kartuPendaftaranView');
+    $routes->get('info', '\App\Controllers\Siswa\SiswaController::infoDashboard');
+    $routes->get('info/(:num)', '\App\Controllers\Siswa\SiswaController::infoDetailById/$1');
     $routes->get('pengumuman', '\App\Controllers\Siswa\SiswaController::pengumumanView');
     $routes->get('ubah-password',   '\App\Controllers\Siswa\SiswaController::ubahPasswordView');
     $routes->post('ubah-password',  '\App\Controllers\Siswa\SiswaController::ubahPasswordAction');
@@ -75,6 +77,7 @@ $routes->group('admin',['filter' => ['session','admin-auth']], static function($
     $routes->get('data-siswa/(:num)', '\App\Controllers\Admin\ManageSiswaController::dataSiswaDetailView/$1');
     $routes->post('verifikasi/(:segment)', '\App\Controllers\Admin\ManageSiswaController::verifikasiPersyaratanAction/$1' );
     $routes->post('ubah-status-seleksi', '\App\Controllers\Admin\ManageSiswaController::ubahStatusSeleksiAction');
+    $routes->get('info-ppdb', '\App\Controllers\Admin\ManageInfoController::infoDashboard');
 });
 
 /*

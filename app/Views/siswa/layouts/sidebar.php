@@ -29,19 +29,10 @@
                     <a class="nav-link" href="/siswa/persyaratan">Berkas Persyaratan</a>
                 </nav>
             </div>
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInformasi" aria-expanded="false" aria-controls="collapseInformasi">
+            <a class="nav-link" href="/siswa/info">
                 <div class="sb-nav-link-icon"><i class="bi bi-info-circle"></i></div>
-                Informasi
-                <div class="sb-sidenav-collapse-arrow"><i class="bi bi-chevron-down"></i></div>
-            </a>
-            <div class="collapse" id="collapseInformasi" aria-labelledby="headingInformasi" data-bs-parent="#sidenavAccordion">
-                <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="/siswa/biaya">Biaya</a>
-                    <a class="nav-link" href="/siswa/syarat-ketentuan">Syarat dan ketentuan</a>
-                    <a class="nav-link" href="/siswa/faq">FAQ</a>
-                </nav>
-            </div>
-            
+                Info PPDB
+            </a>          
             <a class="nav-link" href="/siswa/pengumuman">
                 <div class="sb-nav-link-icon"><i class="bi bi-megaphone"></i></div>
                 Pengumuman

@@ -2,14 +2,19 @@
 
 <?= $this->section('content') ?>
 <main class="container-fluid" style="min-height: 100vh;">
-    <section class="my-5" style="padding-top:100px;">
-
-    <h1 class="fw-bold">Judul</h1>
-    <p class="lead">Tanggal</p>
+<section class="my-5" style="padding-top:100px;">
+    <h1 class="fw-bold"><?= $info->judul ?></h1>
+    <p class="lead tanggal" data-tgl="<?= $info->tanggal ?>"></p>
     <hr>
-    <p>isi Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam quibusdam optio velit incidunt reiciendis at beatae similique iste asperiores recusandae obcaecati tempore dignissimos corrupti possimus repudiandae voluptatum, voluptates delectus quasi.</p>
+    <p><?= $info->isi ?></p>
     <hr>
     <a href="/info" class="btn btn-lg btn-outline-secondary"><i class="bi bi-arrow-bar-left"></i>Kembali</a>
 </section>
 </main>
+<script src="/assets/js/app.js"></script>
+<script>
+     var tanggal = document.querySelectorAll('.tanggal').forEach(element => {
+            displayDate(element);
+        });
+</script>
 <?= $this->endSection() ?>

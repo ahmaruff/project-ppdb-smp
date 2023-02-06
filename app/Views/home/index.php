@@ -73,16 +73,20 @@
             </div>
             <!-- INFO PPDB -->
             <div class="row mt-5">
+                <?php foreach($info as $item) : ?>
                 <div class="col-sm-6 col-md-4 col-lg-4 m-2">
-                    <div class="card" style="width: 18rem;">
-                        <img src="/assets/images/drumband.jpg" class="card-img-top" alt="...">
+                    <div class="card shadow-sm" style="width: 18rem;">
                         <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-primary">Go somewhere</a>
+                          <h4 class="card-title fw-bold"><?= $item->judul ?></h4>
+                          <p class="tanggal fw-bold" data-tgl="<?= $item->tanggal ?>"></p>
+                          <p class="card-text txt-info" data-txt="<?= $item->isi ?>"></p>
+                          <div class="d-grid">
+                            <a href="/info/<?= $item->id ?>" class="btn btn-outline-primary">Info Lebih Lanjut</a>
+                          </div>
                         </div>
                     </div>
                 </div>
+                <?php endforeach ?>
             </div>
         </section>
         <section class="container-fluid" id="persyaratan" style="padding-top: 100px;">
@@ -194,6 +198,11 @@
     <script>
         var tanggal = document.querySelectorAll('.tanggal').forEach(element => {
             displayDate(element);
+        });
+
+        var info = document.querySelectorAll('.txt-info').forEach(element => {
+            var txt = element.dataset.txt;
+            element.innerHTML = shorten(txt,50)+'.....';
         });
     </script>
     <!-- BOOTSTRAP -->

@@ -122,6 +122,62 @@ class SiswaController extends BaseController
         return view('siswa/pengumuman.php', $data);
     }
 
+    public function infoDashboard()
+    {
+        $user = auth()->user();
+
+        $no_registrasi = $user->username;
+        $biodata = $this->db->table('biodata')->where('id_user',$user->id)->get()->getFirstRow();
+
+        //     file path under public folder / <<first 2 number for tahun>> / << 3rd number,"gelombang" >> / <<username>> 
+        $berkas_path = '/uploads/persyaratan/'.substr($no_registrasi,0,2).'/'.substr($no_registrasi,2,1).'/'.$no_registrasi;
+        // output e.g /uploads/persyaratan/23/1/2310002
+
+        // BERKAS
+        $persyaratan = $this->db->table('persyaratan')->where('id_user', $user->id)->get()->getFirstRow(); 
+        $pas_foto_path = $berkas_path.'/'.$persyaratan->pas_foto;
+
+        $info = $this->db->table('info_ppdb')->orderBy('tanggal')->get()->getResult();
+
+        $data = [
+            'title'         => 'Info PPDB',
+            'nama'          => $biodata->nama,
+            'no_registrasi' => $no_registrasi,
+            'pas_foto_path' => $pas_foto_path,
+            'info' => $info,
+        ];
+
+        return view('siswa/info-dashboard.php', $data);
+    }
+
+    public function infoDetailById($id)
+    {
+        $user = auth()->user();
+
+        $no_registrasi = $user->username;
+        $biodata = $this->db->table('biodata')->where('id_user',$user->id)->get()->getFirstRow();
+
+        //     file path under public folder / <<first 2 number for tahun>> / << 3rd number,"gelombang" >> / <<username>> 
+        $berkas_path = '/uploads/persyaratan/'.substr($no_registrasi,0,2).'/'.substr($no_registrasi,2,1).'/'.$no_registrasi;
+        // output e.g /uploads/persyaratan/23/1/2310002
+
+        // BERKAS
+        $persyaratan = $this->db->table('persyaratan')->where('id_user', $user->id)->get()->getFirstRow(); 
+        $pas_foto_path = $berkas_path.'/'.$persyaratan->pas_foto;
+
+        $info = $this->db->table('info_ppdb')->where('id', $id)->get()->getFirstRow();
+
+        $data = [
+            'title'         => 'Info PPDB',
+            'nama'          => $biodata->nama,
+            'no_registrasi' => $no_registrasi,
+            'pas_foto_path' => $pas_foto_path,
+            'info' => $info,
+        ];
+
+        return view('siswa/info-detail.php', $data);
+    }
+
     public function ubahPasswordView()
     {
         $user = auth()->user();
