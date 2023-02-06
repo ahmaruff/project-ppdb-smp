@@ -80,7 +80,7 @@
                 </tbody>
             </table>
             <div>
-                <ul class="pagination" id="list-group"></ul>
+                <ul class="pagination"></ul>
             </div>
         </div>
     </div>

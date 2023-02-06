@@ -26,9 +26,9 @@
                 <div class="sb-nav-link-icon"><i class="bi bi-mortarboard"></i></div>
                 Data Siswa
             </a>    
-            <a class="nav-link" href="/siswa/pengumuman">
-                <div class="sb-nav-link-icon"><i class="bi bi-megaphone"></i></div>
-                Pengumuman
+            <a class="nav-link" href="/admin/info">
+                <div class="sb-nav-link-icon"><i class="bi bi-info-circle"></i></div>
+                Info PPDB
             </a>
             <hr>
             <a class="nav-link" href="/logout">

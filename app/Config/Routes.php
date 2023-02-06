@@ -77,7 +77,13 @@ $routes->group('admin',['filter' => ['session','admin-auth']], static function($
     $routes->get('data-siswa/(:num)', '\App\Controllers\Admin\ManageSiswaController::dataSiswaDetailView/$1');
     $routes->post('verifikasi/(:segment)', '\App\Controllers\Admin\ManageSiswaController::verifikasiPersyaratanAction/$1' );
     $routes->post('ubah-status-seleksi', '\App\Controllers\Admin\ManageSiswaController::ubahStatusSeleksiAction');
-    $routes->get('info-ppdb', '\App\Controllers\Admin\ManageInfoController::infoDashboard');
+    $routes->get('info', '\App\Controllers\Admin\ManageInfoController::infoDashboard');
+    $routes->get('info/(:num)', '\App\Controllers\Admin\ManageInfoController::infoDetailbyId/$1');
+    $routes->get('info/add', '\App\Controllers\Admin\ManageInfoController::infoAddView');
+    $routes->post('info/add', '\App\Controllers\Admin\ManageInfoController::infoAddAction');
+    $routes->get('info/edit/(:num)', '\App\Controllers\Admin\ManageInfoController::infoEditView/$1');
+    $routes->post('info/edit/(:num)', '\App\Controllers\Admin\ManageInfoController::infoEditAction/$1');
+    $routes->get('info/delete/(:num)', '\App\Controllers\Admin\ManageInfoController::infoDeleteAction/$1');
 });
 
 /*
