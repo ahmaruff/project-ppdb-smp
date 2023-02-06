@@ -101,24 +101,6 @@
         </form>
     </div>
 </div>
-<div class="card shadow-sm my-4">
-    <div class="card-body">
-        <h3 class="card-title"></h3>
-        <hr>
-    </div>
-</div>
-<div class="card shadow-sm my-4">
-    <div class="card-body">
-        <h3 class="card-title"></h3>
-        <hr>
-    </div>
-</div>
-<div class="card shadow-sm my-4">
-    <div class="card-body">
-        <h3 class="card-title"></h3>
-        <hr>
-    </div>
-</div>
 <script src="/assets/js/app.js"></script>
 <script>
     var tanggal = document.querySelectorAll('.tanggal').forEach(element => {
