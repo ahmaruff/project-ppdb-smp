@@ -1,3 +1,9 @@
 html {
     scroll-behavior: smooth;
 }
+
+.pagination li {
+  display:inline-block;
+  padding:5px;
+  text-decoration: none;
+}

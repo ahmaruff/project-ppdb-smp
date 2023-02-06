@@ -34,6 +34,7 @@ $routes->get('home',        '\App\Controllers\Home\HomeController::index');
 $routes->get('tentang',     '\App\Controllers\Home\HomeController::tentang');
 $routes->get('info',        '\App\Controllers\Home\HomeController::info');
 $routes->get('info/(:num)', '\App\Controllers\Home\HomeController::infoDetailById/$1');
+$routes->get('tampil-persyaratan/(:num)/(:segment)/(:segment)','\App\Controllers\Admin\ManageSiswaController::showPersyaratan/$1/$2/$3');
 
 service('auth')->routes($routes, [ 'except' => ['login', 'register']]);
 
@@ -70,6 +71,10 @@ $routes->group('admin',['filter' => ['session','admin-auth']], static function($
     $routes->get('jadwal-ppdb/edit/(:num)', '\App\Controllers\Admin\JadwalPpdbController::jadwalEditView/$1');
     $routes->post('jadwal-ppdb/edit/(:num)', '\App\Controllers\Admin\JadwalPpdbController::jadwalEditAction/$1');
     $routes->get('jadwal-ppdb/delete/(:num)', '\App\Controllers\Admin\JadwalPpdbController::jadwalDeleteAction/$1');
+    $routes->get('data-siswa', '\App\Controllers\Admin\ManageSiswaController::dataSiswaView');
+    $routes->get('data-siswa/(:num)', '\App\Controllers\Admin\ManageSiswaController::dataSiswaDetailView/$1');
+    $routes->post('verifikasi/(:segment)', '\App\Controllers\Admin\ManageSiswaController::verifikasiPersyaratanAction/$1' );
+    $routes->post('ubah-status-seleksi', '\App\Controllers\Admin\ManageSiswaController::ubahStatusSeleksiAction');
 });
 
 /*
