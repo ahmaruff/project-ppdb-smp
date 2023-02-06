@@ -245,8 +245,8 @@ class RegisterController extends ShieldRegister
             // uploads/berkas/<<tahun ajaran 2 digit akhir>>/<<gelombang>>/no_registrasi/filename.jpg
             // uploads/berkas/23/1/pas_foto2310001.jpg
 
-            $pas_foto->move(FCPATH."uploads/persyaratan/$year/$gelombang/$no_registrasi/",$pas_foto_filename);
-            $bukti_pembayaran->move(FCPATH."uploads/persyaratan/$year/$gelombang/$no_registrasi/",$bukti_pembayaran_filename);
+            $pas_foto->move(FCPATH."uploads/persyaratan/$year/$gelombang/$no_registrasi/",$pas_foto_filename,true);
+            $bukti_pembayaran->move(FCPATH."uploads/persyaratan/$year/$gelombang/$no_registrasi/",$bukti_pembayaran_filename,true);
             
             // SAVE
             $this->db->table('biodata')->insert($biodataRequest);
