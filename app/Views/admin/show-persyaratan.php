@@ -12,12 +12,14 @@
 </head>
 <body>
     <div id="data" data-url="<?= $file_path.'/'.$berkas ?>" data-mime="<?= $mime ?>"></div>
+    <div class="ratio ratio-4x3">
     <?php if($mime == 'application/pdf') :?>
         <canvas id="the-canvas"></canvas>
     <?php else : ?>
         <div><img src="<?= $file_path.'/'.$berkas ?>" alt=""></div>
         <canvas id="the-canvas d-none"></canvas>
     <?php endif ?>
+    </div>
 </body>
 <script src="/assets/libs/pdfjs-3.3.122/build/pdf.js"></script>
 
