@@ -67,6 +67,7 @@ class ManageSiswaController extends BaseController
         $orangtua = $this->db->table('orangtua')->where('id_user', $id)->get()->getFirstRow();
         $pendidikan = $this->db->table('pendidikan')->where('id_user', $id)->get()->getFirstRow();
         $persyaratan = $this->db->table('persyaratan')->where('id_user', $id)->get()->getFirstRow();
+        $hasil_seleksi = $this->db->table('hasil_seleksi')->where('id_user', $id)->get()->getFirstRow();
 
         $persyaratanHasEmpty = count(array_filter((array)$persyaratan,fn($v)  => empty($v))) > 0;
         $biodataHasEmpty = count(array_filter((array)$biodata,fn($v)  => empty($v))) > 0;
@@ -160,6 +161,7 @@ class ManageSiswaController extends BaseController
             'data_persyaratan' => $data_persyaratan,
             'file_path' => $file_path,
             'ubahStatusSeleksi' => $ubahStatusSeleksi,
+            'hasil_seleksi' => $hasil_seleksi,
         ];
 
         return view('admin/data-siswa-detail.php', $data);
@@ -187,7 +189,8 @@ class ManageSiswaController extends BaseController
         $status = $this->request->getPost('status');
 
         try {
-            $this->db->table('biodata')->update(['status' => $status], ['id_user' => $id_user]);
+            // $this->db->table('biodata')->update(['status' => $status], ['id_user' => $id_user]);
+            $this->db->table('hasil_seleksi')->update(['status' => $status],['id_user' => $id_user]);
          } catch (ValidationException $e) {
             $message = ['success', 'data berhasil diverifikasi'];
              return redirect()->back()->withInput()->with('message',[$message]);

@@ -316,7 +316,7 @@
                         <label for="" class="col-auto form-label">Ubah Status Seleksi</label>
                         <div class="col-sm-6">
                             <select class="form-select" name="status">
-                                <option selected><?= $biodata->status ?></option>
+                                <option selected><?= $hasil_seleksi->status ?></option>
                                 <option value="pending">pending</option>
                                 <option value="diterima">diterima</option>
                                 <option value="gagal">gagal</option>
